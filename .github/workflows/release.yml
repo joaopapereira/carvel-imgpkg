@@ -89,8 +89,13 @@ jobs:
 
           ./hack/build-binaries.sh "$VERSION" > ./go-checksums
 
-          go version -m imgpkg-linux-amd64
-          go version -m dist/carvel-imgpkg_linux_amd64_v1/imgpkg-linux-amd64
+          go version -m imgpkg-linux-amd64 > hand_build.txt
+          go version -m dist/carvel-imgpkg_linux_amd64_v1/imgpkg-linux-amd64 > goreleaser_build.txt
+          cat hand_build.txt
+          echo "============================================="
+          cat goreleaser_build.txt
+          echo "============================================="
+
 
           cat ./go-checksums
           diff ./go-checksums <(cat <<EOF
