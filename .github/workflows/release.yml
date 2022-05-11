@@ -88,6 +88,10 @@ jobs:
           VERSION=`echo ${{ github.ref }}  | grep -Eo '[0-9].*'`
 
           ./hack/build-binaries.sh "$VERSION" > ./go-checksums
+
+          go version -m imgpkg-linux-amd64
+          go version -m dist/carvel-imgpkg_linux_amd64/imgpkg-linux-amd64
+
           cat ./go-checksums
           diff ./go-checksums <(cat <<EOF
           ${{steps.get-checksums-from-draft-release.outputs.result}}
